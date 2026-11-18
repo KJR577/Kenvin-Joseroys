@@ -1,11 +1,10 @@
-import React from 'react';
 import '../styles/Home.css';
 import profileImg from '../assets/profimg.png';
 import kenvinResume from '../assets/Kenvin_Jose_Roys_J_Resume.pdf';
 
-function Home() {
+function Home({ onNavigate }) {
   return (
-    <section className="home-section">
+    <section className="home-section" id="home">
       {/* Text */}
       <div className="home-text">
         {/* Top Resume Download Row */}
@@ -26,10 +25,10 @@ function Home() {
 
         <p className="home-greeting">👋 Hello,</p>
 
-       <h1 className="home-name">
-  <span className="im-text">I'm</span>
-  <span className="typing-text">Kenvin Jose Roys</span>
-</h1>
+        <h1 className="home-name">
+          <span className="im-text">I'm</span>
+          <span className="typing-text">Kenvin Jose Roys</span>
+        </h1>
 
         <p className="home-title">MERN Stack Developer · BSc Computer Science</p>
 
@@ -41,12 +40,23 @@ function Home() {
 
         <div className="home-cta">
           <button
+            type="button"
             className="btn btn-primary"
-            onClick={() => onNavigate('contact')}
+            onClick={() => {
+              if (typeof onNavigate === 'function') {
+                onNavigate('contact');
+              } else {
+                const contactSection = document.getElementById('contact') || document.getElementById('section-contact');
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }
+            }}
           >
             Contact Me →
           </button>
           <button
+            type="button"
             className="btn btn-outline"
             onClick={() => window.open('https://github.com/KJR577', '_blank')}
           >
